@@ -1,4 +1,4 @@
-package com.mironenko.internship_task_1.screens
+package com.mironenko.internship_task_1.screens.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemsListBinding
 import com.mironenko.internship_task_1.model.ItemsService
+import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
 
 class ItemsListFragment : Fragment(), ItemClickListener {
 
     private var _binding: FragmentItemsListBinding? = null
     private val mBinding get() = _binding!!
-    private lateinit var listAdapter: ItemsListAdapter
-    private val itemsService = ItemsService
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        listAdapter = ItemsListAdapter(this)
-        listAdapter.itemsList = itemsService.getItemsList()
-
-    }
+    private val listAdapter: ItemsListAdapter by lazy { ItemsListAdapter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +24,12 @@ class ItemsListFragment : Fragment(), ItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemsListBinding.inflate(inflater, container, false)
+        return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        listAdapter.setItemsList(ItemsService.getItemsList())
 
         listAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -40,7 +39,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
             adapter = listAdapter
             this.setHasFixedSize(true)
         }
-        return mBinding.root
     }
 
     override fun onDestroyView() {

@@ -1,7 +1,8 @@
-package com.mironenko.internship_task_1.screens
+package com.mironenko.internship_task_1.screens.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.model.Item
 import com.mironenko.internship_task_1.databinding.LayoutItemBinding
@@ -11,9 +12,14 @@ interface ItemClickListener {
 }
 
 class ItemsListAdapter(private val clickListener: ItemClickListener) :
-    RecyclerView.Adapter<ItemsListAdapter.ItemViewHolder>() {
+    ListAdapter<Item, ItemsListAdapter.ItemViewHolder>(DiffCallback()) {
 
-    var itemsList: List<Item> = emptyList()
+
+    private var itemsList: List<Item> = emptyList()
+
+    fun setItemsList(items: List<Item>) {
+        itemsList = items
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,11 +29,7 @@ class ItemsListAdapter(private val clickListener: ItemClickListener) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = itemsList[position]
-        holder.bind(item)
-
-        holder.itemView.setOnClickListener {
-            clickListener.onItemClick(item.id)
-        }
+        holder.bind(item, clickListener)
     }
 
     override fun getItemCount() = itemsList.size
@@ -35,8 +37,12 @@ class ItemsListAdapter(private val clickListener: ItemClickListener) :
     inner class ItemViewHolder(private val binding: LayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item) {
+        fun bind(item: Item, clickListener: ItemClickListener) {
             binding.tvName.text = item.name
+            binding.root.setOnClickListener {
+                clickListener.onItemClick(item.id)
+            }
+
         }
     }
 }

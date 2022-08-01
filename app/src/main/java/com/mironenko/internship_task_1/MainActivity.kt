@@ -3,7 +3,7 @@ package com.mironenko.internship_task_1
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mironenko.internship_task_1.databinding.ActivityMainBinding
-import com.mironenko.internship_task_1.screens.ItemsListFragment
+import com.mironenko.internship_task_1.screens.list.ItemsListFragment
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
