@@ -12,9 +12,5 @@ object ItemsService {
 
     fun getItemsList(): List<Item> = items
 
-    fun getItemById(itemId: Int): Item? {
-        val indexFoundElement = items.indexOfFirst { it.id == itemId }
-        return if (indexFoundElement == -1) null
-        else items[indexFoundElement]
-    }
+    fun getItemById(itemId: Int) = items.find { it.id == itemId }
 }

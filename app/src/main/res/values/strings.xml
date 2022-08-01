@@ -3,4 +3,5 @@
     <string name="item_name">Item_name</string>
     <string name="id">Id</string>
     <string name="descriptions">Descriptions</string>
+    <string name="id_detail">ID %d</string>
 </resources>
