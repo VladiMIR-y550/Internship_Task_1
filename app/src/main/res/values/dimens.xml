@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_main">8dp</dimen>
+    <dimen name="text_size_card">25sp</dimen>
+    <dimen name="radius_card">5dp</dimen>
+    <dimen name="text_size_name">18sp</dimen>
+    <dimen name="text_size_descriptions">16sp</dimen>
+    <dimen name="text_size_id">12sp</dimen>
+</resources>
