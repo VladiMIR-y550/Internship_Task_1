@@ -1,6 +1,8 @@
 package com.mironenko.internship_task_1.screens.detail
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +27,11 @@ class ItemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        Log.d(TAG, getSharedPrefItemId().toString())
+
+
         arguments?.let {
             val itemId = it.getInt(ARG_USER_ID)
             val item = ItemsService.getItemById(itemId)
@@ -40,8 +47,18 @@ class ItemDetailFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun getSharedPrefItemId(): Int {
+        return requireContext().getSharedPreferences(
+            getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        ).getInt(
+            getString(R.string.saved_item_id), -1
+        )
+    }
+
     companion object {
         private const val ARG_USER_ID = "ARG_USER_ID"
+        private const val TAG = "TAG"
 
         fun newInstance(userId: Int): ItemDetailFragment {
             val fragment = ItemDetailFragment()

@@ -42,7 +42,6 @@ class ItemsListAdapter(private val clickListener: ItemClickListener) :
             binding.root.setOnClickListener {
                 clickListener.onItemClick(item.id)
             }
-
         }
     }
 }

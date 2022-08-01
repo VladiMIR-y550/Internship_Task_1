@@ -1,5 +1,6 @@
 package com.mironenko.internship_task_1.screens.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +48,12 @@ class ItemsListFragment : Fragment(), ItemClickListener {
     }
 
     override fun onItemClick(itemId: Int) {
+        requireContext().getSharedPreferences(
+            getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        ).edit()
+            .putInt(getString(R.string.saved_item_id), itemId).apply()
+
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ItemDetailFragment.newInstance(itemId))
             .addToBackStack(null)
