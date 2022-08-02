@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
+import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemsListBinding
 import com.mironenko.internship_task_1.model.ItemsService
 import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
@@ -49,10 +52,11 @@ class ItemsListFragment : Fragment(), ItemClickListener {
 
     override fun onItemClick(itemId: Int) {
         requireContext().getSharedPreferences(
-            getString(R.string.preference_file_key),
+            PREFERENCE_FILE_KEY,
             Context.MODE_PRIVATE
-        ).edit()
-            .putInt(getString(R.string.saved_item_id), itemId).apply()
+        ).edit {
+            putInt(SAVED_ITEM_ID, itemId)
+        }
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ItemDetailFragment.newInstance(itemId))

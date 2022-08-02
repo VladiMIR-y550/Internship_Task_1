@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
+import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.model.ItemsService
 
@@ -49,10 +51,10 @@ class ItemDetailFragment : Fragment() {
 
     private fun getSharedPrefItemId(): Int {
         return requireContext().getSharedPreferences(
-            getString(R.string.preference_file_key),
+            PREFERENCE_FILE_KEY,
             Context.MODE_PRIVATE
         ).getInt(
-            getString(R.string.saved_item_id), -1
+            SAVED_ITEM_ID, -1
         )
     }
 
