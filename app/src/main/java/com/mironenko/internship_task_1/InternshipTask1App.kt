@@ -10,6 +10,8 @@ class InternshipTask1App : Application() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, AppService::class.java))
+        } else {
+            startService(Intent(this, AppService::class.java))
         }
     }
 }

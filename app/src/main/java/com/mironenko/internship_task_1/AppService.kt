@@ -18,7 +18,11 @@ class AppService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         showNotification()
-        return super.onStartCommand(intent, flags, startId)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            START_NOT_STICKY
+        } else {
+            START_STICKY
+        }
     }
 
     override fun onDestroy() {
