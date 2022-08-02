@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Internship_Task_1"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:name=".InternshipTask1App">
         <activity
             android:name=".MainActivity"
             android:exported="true">
