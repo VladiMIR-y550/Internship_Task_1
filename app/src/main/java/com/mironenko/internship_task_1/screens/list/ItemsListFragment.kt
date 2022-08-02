@@ -57,7 +57,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
         ).edit {
             putInt(SAVED_ITEM_ID, itemId)
         }
-
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ItemDetailFragment.newInstance(itemId))
             .addToBackStack(null)
