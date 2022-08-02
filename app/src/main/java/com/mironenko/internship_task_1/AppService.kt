@@ -44,10 +44,11 @@ class AppService : Service() {
 
     private fun showNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationIntent = Intent(this, MainActivity::class.java)
 
-            val pendingIntent = PendingIntent.getActivity(
-                this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE
+            val broadcastIntent = Intent(ACTION_NOTIFICATION_CLICKED)
+
+            val pendingIntent = PendingIntent.getBroadcast(
+                this, 0, broadcastIntent, PendingIntent.FLAG_IMMUTABLE
             )
 
             val notification = Notification
