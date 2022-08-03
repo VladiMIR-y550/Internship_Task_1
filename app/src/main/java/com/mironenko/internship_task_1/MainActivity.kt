@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val mBinding get() = _binding!!
     private val appReceiver = AppBroadcastReceiver()
+    private var itemId: Int = DEFAULT_VALUE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         initReceiver()
+        getItemIdFromIntent()
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -26,9 +28,12 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
-        if (getItemIdFromIntent() != DEFAULT_VALUE) {
+        if (itemId != DEFAULT_VALUE) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ItemDetailFragment.newInstance(getItemIdFromIntent()))
+                .replace(
+                    R.id.fragment_container,
+                    ItemDetailFragment.newInstance(itemId)
+                )
                 .addToBackStack(null)
                 .commit()
         }
@@ -45,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(appReceiver, filter)
     }
 
-    private fun getItemIdFromIntent(): Int =
-        if (intent.hasExtra(Intent.EXTRA_TEXT)) intent.getIntExtra(Intent.EXTRA_TEXT, DEFAULT_VALUE) else DEFAULT_VALUE
+    private fun getItemIdFromIntent() {
+        itemId = if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+            intent.getIntExtra(Intent.EXTRA_TEXT, DEFAULT_VALUE)
+        } else {
+            DEFAULT_VALUE
+        }
+    }
 }
