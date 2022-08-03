@@ -13,12 +13,12 @@ import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.model.Item
-import com.mironenko.internship_task_1.model.ItemsService
 
-class ItemDetailFragment : Fragment(), IItemDetailContract.IView {
+class ItemDetailFragment : Fragment(),
+    ItemDetailContract.View {
     private var _binding: FragmentItemDetailsBinding? = null
     private val mBinding get() = _binding!!
-    private val presenter: IItemDetailContract.IPresenter = ItemDetailPresenter
+    private val presenter: ItemDetailContract.Presenter = ItemDetailPresenter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

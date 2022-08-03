@@ -18,11 +18,12 @@ import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
 import com.mironenko.internship_task_1.screens.list.adapter.ItemClickListener
 import com.mironenko.internship_task_1.screens.list.adapter.ItemsListAdapter
 
-class ItemsListFragment : Fragment(), IItemsListContract.IView, ItemClickListener {
+class ItemsListFragment : Fragment(),
+    ItemsListContract.View, ItemClickListener {
 
     private var _binding: FragmentItemsListBinding? = null
     private val mBinding get() = _binding!!
-    private val presenter: IItemsListContract.IPresenter = ItemsListPresenter
+    private val presenter: ItemsListContract.Presenter = ItemsListPresenter
     private val listAdapter: ItemsListAdapter by lazy { ItemsListAdapter(this) }
 
     override fun onAttach(context: Context) {
