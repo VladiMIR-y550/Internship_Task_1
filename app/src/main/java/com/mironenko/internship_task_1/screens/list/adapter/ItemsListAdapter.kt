@@ -1,4 +1,4 @@
-package com.mironenko.internship_task_1.screens.list
+package com.mironenko.internship_task_1.screens.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

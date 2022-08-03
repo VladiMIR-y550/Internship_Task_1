@@ -12,5 +12,5 @@ object ItemsService {
 
     fun getItemsList(): List<Item> = items
 
-    fun getItemById(itemId: Int): Item? = items.find { it.id == itemId }
+    fun findItemById(itemId: Int): Item? = items.find { it.id == itemId }
 }

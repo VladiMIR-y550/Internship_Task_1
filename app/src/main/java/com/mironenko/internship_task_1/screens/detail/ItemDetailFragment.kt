@@ -12,11 +12,18 @@ import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
+import com.mironenko.internship_task_1.model.Item
 import com.mironenko.internship_task_1.model.ItemsService
 
-class ItemDetailFragment : Fragment() {
+class ItemDetailFragment : Fragment(), IItemDetailContract.IView {
     private var _binding: FragmentItemDetailsBinding? = null
     private val mBinding get() = _binding!!
+    private val presenter: IItemDetailContract.IPresenter = ItemDetailPresenter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        presenter.attachView(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,23 +37,28 @@ class ItemDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         Log.d(TAG, getSharedPrefItemId().toString())
-
 
         arguments?.let {
             val itemId = it.getInt(ARG_USER_ID)
-            val item = ItemsService.getItemById(itemId)
-
-            mBinding.tvItemId.text = getString(R.string.id_detail, item?.id)
-            mBinding.tvItemName.text = item?.name
-            mBinding.tvItemDescription.text = item?.description
+            presenter.getItemById(itemId)
         }
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        presenter.detachView()
+        super.onDetach()
+    }
+
+    override fun showItemDetail(item: Item) {
+        mBinding.tvItemId.text = getString(R.string.id_detail, item.id)
+        mBinding.tvItemName.text = item.name
+        mBinding.tvItemDescription.text = item.description
     }
 
     private fun getSharedPrefItemId(): Int {
