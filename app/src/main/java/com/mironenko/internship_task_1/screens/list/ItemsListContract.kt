@@ -1,5 +1,6 @@
 package com.mironenko.internship_task_1.screens.list
 
+import android.content.Context
 import com.mironenko.internship_task_1.base.BasePresenter
 import com.mironenko.internship_task_1.base.BaseView
 import com.mironenko.internship_task_1.model.Item
@@ -12,5 +13,6 @@ interface ItemsListContract {
 
     interface Presenter : BasePresenter<View> {
         fun getItemsList()
+        fun saveItemIdInPref(appContext: Context, itemId: Int)
     }
 }

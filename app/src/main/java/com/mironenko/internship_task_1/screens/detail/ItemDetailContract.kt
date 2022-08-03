@@ -10,7 +10,7 @@ interface ItemDetailContract {
         fun showItemDetail(item: Item)
     }
 
-    interface Presenter: BasePresenter<View> {
+    interface Presenter : BasePresenter<View> {
         fun getItemById(itemId: Int)
     }
 }
