@@ -2,12 +2,15 @@ package com.mironenko.internship_task_1.screens.detail
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
+import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.model.Item
 
@@ -54,11 +57,11 @@ class ItemDetailFragment : Fragment(),
         mBinding.tvItemId.text = getString(R.string.id_detail, item.id)
         mBinding.tvItemName.text = item.name
         mBinding.tvItemDescription.text = item.description
+
     }
 
     companion object {
         private const val ARG_USER_ID = "ARG_USER_ID"
-        private const val TAG = "TAG"
 
         fun newInstance(userId: Int): ItemDetailFragment {
             val fragment = ItemDetailFragment()

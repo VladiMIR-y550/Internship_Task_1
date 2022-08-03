@@ -67,7 +67,7 @@ class ItemsListFragment : Fragment(),
     }
 
     override fun onItemClick(itemId: Int) {
-        presenter.saveItemIdInPref(requireContext().applicationContext, itemId)
+        presenter.saveItemIdInPref(itemId)
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ItemDetailFragment.newInstance(itemId))
