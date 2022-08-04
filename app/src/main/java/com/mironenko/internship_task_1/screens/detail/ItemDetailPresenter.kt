@@ -4,7 +4,7 @@ import com.mironenko.internship_task_1.DEFAULT_VALUE
 import com.mironenko.internship_task_1.base.BasePresenterImpl
 import com.mironenko.internship_task_1.model.ItemsService
 
-object ItemDetailPresenter : BasePresenterImpl<ItemDetailContract.View>(),
+class ItemDetailPresenter : BasePresenterImpl<ItemDetailContract.View>(),
     ItemDetailContract.Presenter {
     private var itemId = DEFAULT_VALUE
 

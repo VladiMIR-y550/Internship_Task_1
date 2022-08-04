@@ -2,15 +2,12 @@ package com.mironenko.internship_task_1.screens.detail
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
-import com.mironenko.internship_task_1.SAVED_ITEM_ID
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.model.Item
 
@@ -18,7 +15,7 @@ class ItemDetailFragment : Fragment(),
     ItemDetailContract.View {
     private var _binding: FragmentItemDetailsBinding? = null
     private val mBinding get() = _binding!!
-    private val presenter: ItemDetailContract.Presenter = ItemDetailPresenter
+    private val presenter: ItemDetailContract.Presenter = ItemDetailPresenter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

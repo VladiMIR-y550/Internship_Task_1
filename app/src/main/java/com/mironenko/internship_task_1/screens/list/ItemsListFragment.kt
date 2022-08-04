@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemsListBinding
 import com.mironenko.internship_task_1.model.Item
@@ -20,8 +21,14 @@ class ItemsListFragment : Fragment(),
 
     private var _binding: FragmentItemsListBinding? = null
     private val mBinding get() = _binding!!
-    private val presenter: ItemsListContract.Presenter = ItemsListPresenter
     private val listAdapter: ItemsListAdapter by lazy { ItemsListAdapter(this) }
+    private val presenter: ItemsListContract.Presenter by lazy {
+        ItemsListPresenter(
+            requireContext().getSharedPreferences(
+                PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
