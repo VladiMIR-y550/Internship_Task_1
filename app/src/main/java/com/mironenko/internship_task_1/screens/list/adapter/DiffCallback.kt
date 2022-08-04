@@ -1,4 +1,4 @@
-package com.mironenko.internship_task_1.screens.list
+package com.mironenko.internship_task_1.screens.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.mironenko.internship_task_1.model.Item

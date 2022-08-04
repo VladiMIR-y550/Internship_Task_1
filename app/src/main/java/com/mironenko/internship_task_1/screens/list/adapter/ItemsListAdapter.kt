@@ -1,4 +1,4 @@
-package com.mironenko.internship_task_1.screens.list
+package com.mironenko.internship_task_1.screens.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.databinding.LayoutItemBinding
 import com.mironenko.internship_task_1.model.Item
+import com.mironenko.internship_task_1.screens.list.adapter.DiffCallback
 
 interface ItemClickListener {
     fun onItemClick(itemId: Int)
@@ -14,13 +15,6 @@ interface ItemClickListener {
 class ItemsListAdapter(private val clickListener: ItemClickListener) :
     ListAdapter<Item, ItemsListAdapter.ItemViewHolder>(DiffCallback()) {
 
-
-    private var itemsList: List<Item> = emptyList()
-
-    fun setItemsList(items: List<Item>) {
-        itemsList = items
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = LayoutItemBinding.inflate(inflater, parent, false)
@@ -28,11 +22,9 @@ class ItemsListAdapter(private val clickListener: ItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = itemsList[position]
+        val item = getItem(position)
         holder.bind(item, clickListener)
     }
-
-    override fun getItemCount() = itemsList.size
 
     inner class ItemViewHolder(private val binding: LayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
