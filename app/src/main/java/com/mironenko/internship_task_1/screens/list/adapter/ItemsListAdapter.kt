@@ -1,4 +1,4 @@
-package com.mironenko.internship_task_1.screens.list
+package com.mironenko.internship_task_1.screens.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.databinding.LayoutItemBinding
 import com.mironenko.internship_task_1.model.Item
+import com.mironenko.internship_task_1.screens.list.adapter.DiffCallback
 
 interface ItemClickListener {
     fun onItemClick(itemId: Int)
