@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.factory
@@ -17,7 +16,6 @@ class ItemDetailFragment : Fragment() {
     private var _binding: FragmentItemDetailsBinding? = null
     private val mBinding get() = _binding!!
     private val viewModel: ItemDetailViewModel by viewModels { factory() }
-    private val itemObserver: Observer<Item> = Observer { showItem(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,21 +28,14 @@ class ItemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.item.observe(viewLifecycleOwner) {
+            showItem(it)
+        }
 
         arguments?.let {
             val itemId = it.getInt(ARG_USER_ID)
             viewModel.getItemById(itemId)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.item.observe(viewLifecycleOwner, itemObserver)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.item.removeObserver(itemObserver)
     }
 
     override fun onDestroyView() {

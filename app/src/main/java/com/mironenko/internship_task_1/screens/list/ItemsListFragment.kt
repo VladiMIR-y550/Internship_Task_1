@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemsListBinding
 import com.mironenko.internship_task_1.factory
-import com.mironenko.internship_task_1.model.Item
 import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
 import com.mironenko.internship_task_1.screens.list.adapter.ItemClickListener
 import com.mironenko.internship_task_1.screens.list.adapter.ItemsListAdapter
@@ -23,7 +21,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
     private val mBinding get() = _binding!!
     private val listAdapter: ItemsListAdapter by lazy { ItemsListAdapter(this) }
     private val viewModel: ItemsListViewModel by viewModels { factory() }
-    private val itemsObserver: Observer<List<Item>> = Observer { listAdapter.setItemsList(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +33,10 @@ class ItemsListFragment : Fragment(), ItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.items.observe(viewLifecycleOwner) {
+            listAdapter.setItemsList(it)
+        }
+
         listAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
@@ -44,16 +45,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
             adapter = listAdapter
             this.setHasFixedSize(true)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.items.observe(viewLifecycleOwner, itemsObserver)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.items.removeObserver(itemsObserver)
     }
 
     override fun onDestroyView() {
