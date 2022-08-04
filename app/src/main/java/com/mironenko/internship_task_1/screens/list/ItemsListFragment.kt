@@ -34,7 +34,7 @@ class ItemsListFragment : Fragment(), ItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.items.observe(viewLifecycleOwner) {
-            listAdapter.setItemsList(it)
+            listAdapter.submitList(it)
         }
 
         listAdapter.stateRestorationPolicy =
