@@ -13,17 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemsListBinding
 import com.mironenko.internship_task_1.factory
-<<<<<<< HEAD
-import com.mironenko.internship_task_1.intent.ItemsListIntent
 import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
 import com.mironenko.internship_task_1.screens.list.adapter.ItemClickListener
 import com.mironenko.internship_task_1.screens.list.adapter.ItemsListAdapter
-import com.mironenko.internship_task_1.viewstate.ItemsListState
-=======
-import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
-import com.mironenko.internship_task_1.screens.list.adapter.ItemClickListener
-import com.mironenko.internship_task_1.screens.list.adapter.ItemsListAdapter
->>>>>>> mvi_mvvm
 
 class ItemsListFragment : Fragment(), ItemClickListener {
 
@@ -43,22 +35,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-<<<<<<< HEAD
-        viewModel.items.observe(viewLifecycleOwner) {
-            when (it) {
-                is ItemsListState.NoItemsState -> {
-                    viewModel.render(ItemsListIntent.FetchItems)
-                }
-                is ItemsListState.ItemsLoadingState -> {
-                    Toast.makeText(requireContext(), "List items loading", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                is ItemsListState.ItemsLoadedState -> {
-                    listAdapter.submitList(it.item)
-                }
-                is ItemsListState.ItemsErrorState -> {
-                    Log.e(ItemsListFragment::class.java.simpleName, it.message)
-=======
         viewModel.items.observe(viewLifecycleOwner) { state ->
             if (state.isLoading) {
                 Toast.makeText(requireContext(), "List items loading", Toast.LENGTH_SHORT)
@@ -73,7 +49,6 @@ class ItemsListFragment : Fragment(), ItemClickListener {
                         Toast.makeText(requireContext(), "List items is Empty", Toast.LENGTH_SHORT)
                             .show()
                     }
->>>>>>> mvi_mvvm
                 }
             }
         }
@@ -94,11 +69,7 @@ class ItemsListFragment : Fragment(), ItemClickListener {
     }
 
     override fun onItemClick(itemId: Int) {
-<<<<<<< HEAD
-        viewModel.render(ItemsListIntent.ClickedItemIntent(itemId))
-=======
         viewModel.saveItemId(itemId)
->>>>>>> mvi_mvvm
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ItemDetailFragment.newInstance(itemId))

@@ -16,15 +16,6 @@ class ItemsListViewModel(
     private val itemService: ItemsService
 ) : ViewModel() {
 
-<<<<<<< HEAD
-    private val _items =
-        MutableLiveData<ItemsListState>().apply { postValue(ItemsListState.NoItemsState) }
-    val items: LiveData<ItemsListState> = _items
-
-    fun render(intent: ItemsListIntent) {
-        when (intent) {
-            is ItemsListIntent.ClickedItemIntent -> {
-=======
     private val _items: MutableLiveData<ItemsListState> =
         MutableLiveData<ItemsListState>().apply {
             postValue(
@@ -47,16 +38,11 @@ class ItemsListViewModel(
     private fun intentHandler(intent: ItemsListIntent) {
         when (intent) {
             is ItemsListIntent.SaveItemIntent -> {
->>>>>>> mvi_mvvm
                 sharedPreferences.edit {
                     putInt(SAVED_ITEM_ID, intent.itemId)
                 }
             }
-<<<<<<< HEAD
-            is ItemsListIntent.FetchItems -> {
-                _items.postValue(ItemsListState.ItemsLoadingState)
-                _items.postValue(ItemsListState.ItemsLoadedState(itemService.getItemsList()))
-=======
+
             is ItemsListIntent.FetchItemsIntent -> {
                 _items.postValue(
                     try {
@@ -72,7 +58,6 @@ class ItemsListViewModel(
                         )
                     }
                 )
->>>>>>> mvi_mvvm
             }
             else -> {
                 Log.d(ItemsListViewModel::class.java.simpleName, "Unknown Event")
