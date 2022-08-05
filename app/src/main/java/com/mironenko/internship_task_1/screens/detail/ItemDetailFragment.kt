@@ -11,9 +11,14 @@ import androidx.fragment.app.viewModels
 import com.mironenko.internship_task_1.R
 import com.mironenko.internship_task_1.databinding.FragmentItemDetailsBinding
 import com.mironenko.internship_task_1.factory
+<<<<<<< HEAD
 import com.mironenko.internship_task_1.intent.ItemDetailIntent
 import com.mironenko.internship_task_1.model.Item
 import com.mironenko.internship_task_1.viewstate.ItemDetailState
+=======
+import com.mironenko.internship_task_1.model.Item
+import com.mironenko.internship_task_1.screens.list.ItemsListFragment
+>>>>>>> mvi_mvvm
 
 class ItemDetailFragment : Fragment() {
     private var _binding: FragmentItemDetailsBinding? = null
@@ -31,6 +36,7 @@ class ItemDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+<<<<<<< HEAD
         viewModel.item.observe(viewLifecycleOwner) {
             when (it) {
                 is ItemDetailState.NoItemState -> {
@@ -43,13 +49,33 @@ class ItemDetailFragment : Fragment() {
                 }
                 is ItemDetailState.ItemLoadedState -> {
                     showItem(it.item)
+=======
+        viewModel.item.observe(viewLifecycleOwner) { state ->
+            if (state.isLoading) {
+                Toast.makeText(requireContext(), "Item is loading", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                if (state.data != null) {
+                    showItem(state.data)
+                } else {
+                    if (state.errorMessage != null) {
+                        Log.e(ItemsListFragment::class.java.simpleName, state.errorMessage)
+                    } else {
+                        Toast.makeText(requireContext(), "No Items", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+>>>>>>> mvi_mvvm
                 }
             }
         }
 
         arguments?.let {
             val itemId = it.getInt(ARG_USER_ID)
+<<<<<<< HEAD
             viewModel.getItemById(ItemDetailIntent.SaveItemIntent(itemId))
+=======
+            viewModel.getItemById(itemId)
+>>>>>>> mvi_mvvm
         }
     }
 

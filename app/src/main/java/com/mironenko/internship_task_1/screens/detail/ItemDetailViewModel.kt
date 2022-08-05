@@ -13,6 +13,7 @@ class ItemDetailViewModel(private val itemService: ItemsService) :
     ViewModel() {
 
     private val _item =
+<<<<<<< HEAD
         MutableLiveData<ItemDetailState>().apply { postValue(ItemDetailState.NoItemState) }
     val item: LiveData<ItemDetailState> = _item
 
@@ -21,6 +22,28 @@ class ItemDetailViewModel(private val itemService: ItemsService) :
             is ItemDetailIntent.SaveItemIntent -> {
                 itemService.findItemById(event.itemId)
                     ?.let { _item.postValue(ItemDetailState.ItemLoadedState(it)) }
+=======
+        MutableLiveData<ItemDetailState>().apply {
+            postValue(
+                ItemDetailState(
+                    isLoading = true,
+                    data = null
+                )
+            )
+        }
+    val item: LiveData<ItemDetailState> = _item
+
+    fun getItemById(itemId: Int) {
+        intentHandler(ItemDetailIntent.LoadItemIntent(itemId))
+    }
+
+    private fun intentHandler(event: ItemsListIntent) {
+        when (event) {
+            is ItemDetailIntent.LoadItemIntent -> {
+                _item.postValue(ItemDetailState(isLoading = true))
+                itemService.findItemById(event.itemId)
+                    ?.let { _item.postValue(ItemDetailState(isLoading = false, data = it)) }
+>>>>>>> mvi_mvvm
             }
             else -> {
                 Log.d(ItemDetailViewModel::class.java.simpleName, "Unknown Event")
