@@ -4,6 +4,10 @@ import android.app.*
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import com.mironenko.internship_task_1.util.ACTION_NOTIFICATION_CLICKED
+import com.mironenko.internship_task_1.util.CHANNEL_ID
+import com.mironenko.internship_task_1.util.CHANNEL_NAME
+import com.mironenko.internship_task_1.util.NOTIFICATION_ID
 
 class AppService : Service() {
 

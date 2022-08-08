@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mironenko.internship_task_1.databinding.ActivityMainBinding
 import com.mironenko.internship_task_1.screens.detail.ItemDetailFragment
 import com.mironenko.internship_task_1.screens.list.ItemsListFragment
+import com.mironenko.internship_task_1.util.ACTION_NOTIFICATION_CLICKED
+import com.mironenko.internship_task_1.util.DEFAULT_VALUE
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null

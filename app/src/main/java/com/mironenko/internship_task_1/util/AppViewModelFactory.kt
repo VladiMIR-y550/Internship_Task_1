@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mironenko.internship_task_1.InternshipTask1App
-import com.mironenko.internship_task_1.PREFERENCE_FILE_KEY
 import com.mironenko.internship_task_1.data.details.GetItemByIdInteractor
 import com.mironenko.internship_task_1.data.list.GetItemsInteractor
 import com.mironenko.internship_task_1.screens.detail.ItemDetailViewModel
